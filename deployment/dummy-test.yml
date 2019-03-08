@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-test
+spec:
+  selector:
+    matchLabels:
+      app: dummy-test
+  template:
+    metadata:
+      labels:
+        app: dummy-test
+    spec:
+      containers:
+      - name: dummy-test
+        image: index.docker.io/azraelzealous/k8stest:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+        env:
+          - name: MY_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: test-secret
+                key: username
+          - name: MY_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: test-secret
+                key: password
+          - name: BASE64_STRING
+            valueFrom:
+              secretKeyRef:
+                name: test-secret
+                key: base64EncodeString
