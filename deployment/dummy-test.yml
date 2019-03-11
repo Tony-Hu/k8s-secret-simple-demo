@@ -28,7 +28,7 @@ spec:
               secretKeyRef:
                 name: test-secret
                 key: password
-          - name: BASE64_STRING
+          - name: MY_BASE64ENCODE
             valueFrom:
               secretKeyRef:
                 name: test-secret
